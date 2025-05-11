@@ -3,6 +3,7 @@ import Step1SelectAsset from "../components/CreateClaimWizard/Step1SelectAsset/S
 import Step2Disclaimer from "../components/CreateClaimWizard/Step2Disclaimer/Step2Disclaimer";
 import Step3IncidentTime from "../components/CreateClaimWizard/Step3IncidentTime/Step3IncidentTime";
 import Step4IncidentType from "../components/CreateClaimWizard/Step4IncidentType/Step4IncidentType";
+import Step5FullIncidentForm from "../components/CreateClaimWizard/Step5FullIncidentForm/Step5FullIncidentForm";
 
 function CreateClaim() {
   const [step, setStep] = useState(1);
@@ -18,8 +19,8 @@ function CreateClaim() {
   const asset = {
     id: 1,
     title: "Comprehensive Car Insurance",
-    subtitle: "2007 Mercedes-Benz Sprinter EDE679",
-    policyNumber: "MOTS00579439",
+    subtitle: "2017 Mercedes-Benz Sprinter ABC123",
+    policyNumber: "MOTS00579123",
   };
 
   const handleChange = (field, value) => {
@@ -34,7 +35,7 @@ function CreateClaim() {
   return (
     <main className="max-w-2xl mx-auto py-8 px-4 space-y-6">
       <h1 className="text-2xl font-bold">Make a Claim</h1>
-      <div className="text-sm text-gray-500 mb-4">Step {step} of 3</div>
+      <div className="text-sm text-gray-500 mb-4">Step {step} of 5</div>
 
       {step === 1 && (
         <Step1SelectAsset
@@ -67,6 +68,15 @@ function CreateClaim() {
           onSelect={setIncidentType}
           onBack={handleBack}
           onNext={handleNext}
+        />
+      )}
+
+      {step === 5 && (
+        <Step5FullIncidentForm
+          onBack={handleBack}
+          onSubmit={() => {
+            alert("🎉 Claim submitted successfully!");
+          }}
         />
       )}
     </main>
