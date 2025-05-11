@@ -1,4 +1,4 @@
-function Step1SelectAsset({ asset, onSelect }) {
+function Step1SelectAsset({ assets, onSelect }) {
   return (
     <section className="space-y-4">
       <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded">
@@ -8,14 +8,17 @@ function Step1SelectAsset({ asset, onSelect }) {
         </p>
       </div>
 
-      <div
-        className="border border-gray-300 p-4 rounded bg-white shadow cursor-pointer hover:border-blue-500"
-        onClick={() => onSelect(asset)}
-      >
-        <h2 className="font-semibold">{asset.title}</h2>
-        <p>{asset.subtitle}</p>
-        <p className="text-sm text-gray-500">Policy number: {asset.policyNumber}</p>
-      </div>
+      {assets.map((asset) => (
+        <div
+          key={asset.id}
+          className="border border-gray-300 p-4 rounded bg-white shadow cursor-pointer hover:border-blue-500"
+          onClick={() => onSelect(asset)}
+        >
+          <h2 className="font-semibold">{asset.title}</h2>
+          <p>{asset.subtitle}</p>
+          <p className="text-sm text-gray-500">Policy number: {asset.policyNumber}</p>
+        </div>
+      ))}
     </section>
   );
 }

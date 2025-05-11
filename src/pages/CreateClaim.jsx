@@ -19,13 +19,21 @@ function CreateClaim() {
   const [incidentType, setIncidentType] = useState("");
   const [showGlassClaim, setShowGlassClaim] = useState(false);
 
-  // Asset to choose from (mocked for now)
-  const asset = {
-    id: 1,
-    title: "Comprehensive Car Insurance",
-    subtitle: "2017 Mercedes-Benz Sprinter ABC123",
-    policyNumber: "MOTS00579123",
-  };
+  // Assets to choose from (mocked for now)
+  const assets = [
+    {
+      id: 1,
+      title: "Comprehensive Car Insurance",
+      subtitle: "2017 Mercedes-Benz Sprinter ABC123",
+      policyNumber: "MOTS00579123",
+    },
+    {
+      id: 2,
+      title: "Third Party Car Insurance",
+      subtitle: "2001 Honda Fit XYZ987",
+      policyNumber: "MOTS00579777",
+    }
+  ];
 
   const handleChange = (field, value) => {
     if (field === "date") setIncidentDate(value);
@@ -51,7 +59,7 @@ function CreateClaim() {
 
       {step === 1 && (
         <Step1SelectAsset
-          asset={asset}
+          assets={assets}
           onSelect={(asset) => {
             setSelectedAsset(asset);
             handleNext();
