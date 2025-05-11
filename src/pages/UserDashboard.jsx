@@ -1,4 +1,4 @@
-import ActiveClaims from '../components/CreateClaimWizard/ActiveClaims/ActiveClaims.jsx';
+import ActiveClaims from '../components/ActiveClaims/ActiveClaims.jsx';
 import Quotes from '../components/Quotes';
 import ActivePolicies from '../components/ActivePolicies';
 
