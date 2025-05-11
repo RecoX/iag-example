@@ -1,4 +1,4 @@
-import SectionWrapper from './SectionWrapper';
+import SectionWrapper from './Wrappers/SectionWrapper';
 
 function Quotes() {
   return (

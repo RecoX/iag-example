@@ -4,6 +4,7 @@ import Step2Disclaimer from "../components/CreateClaimWizard/Step2Disclaimer/Ste
 import Step3IncidentTime from "../components/CreateClaimWizard/Step3IncidentTime/Step3IncidentTime";
 import Step4IncidentType from "../components/CreateClaimWizard/Step4IncidentType/Step4IncidentType";
 import Step5FullIncidentForm from "../components/CreateClaimWizard/Step5FullIncidentForm/Step5FullIncidentForm";
+import GlassClaim from "../components/CreateClaimWizard/GlassClaim/GlassClaim";
 
 function CreateClaim() {
   const [step, setStep] = useState(1);
@@ -14,6 +15,7 @@ function CreateClaim() {
   const [incidentTime, setIncidentTime] = useState("");
   const [meridiem, setMeridiem] = useState("AM");
   const [incidentType, setIncidentType] = useState("");
+  const [showGlassClaim, setShowGlassClaim] = useState(false);
 
   // Asset to choose from (mocked for now)
   const asset = {
@@ -31,6 +33,14 @@ function CreateClaim() {
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
+
+  const addClaim = (newClaim) => {
+    const existing = JSON.parse(localStorage.getItem("activeClaims")) || [];
+    localStorage.setItem(
+      "activeClaims",
+      JSON.stringify([...existing, newClaim])
+    );
+  };
 
   return (
     <main className="max-w-2xl mx-auto py-8 px-4 space-y-6">
@@ -62,12 +72,25 @@ function CreateClaim() {
         />
       )}
 
-      {step === 4 && (
+      {step === 4 && !showGlassClaim && (
         <Step4IncidentType
           selected={incidentType}
-          onSelect={setIncidentType}
+          onSelect={(val) => {
+            setIncidentType(val);
+            setShowGlassClaim(val === "glass");
+          }}
           onBack={handleBack}
           onNext={handleNext}
+        />
+      )}
+
+      {step === 4 && showGlassClaim && (
+        <GlassClaim
+          onBack={() => {
+            setShowGlassClaim(false);
+            setIncidentType("");
+            setStep(4); // ✅ Explicitly restore step 4
+          }}
         />
       )}
 
@@ -75,7 +98,14 @@ function CreateClaim() {
         <Step5FullIncidentForm
           onBack={handleBack}
           onSubmit={() => {
+            addClaim({
+              id: Date.now(),
+              title: selectedAsset?.subtitle || "Untitled Vehicle",
+              type: "Motor insurance claim",
+              status: "Open claim",
+            });
             alert("🎉 Claim submitted successfully!");
+            setStep(1);
           }}
         />
       )}
