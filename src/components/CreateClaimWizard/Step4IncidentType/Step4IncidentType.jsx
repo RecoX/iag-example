@@ -80,7 +80,6 @@ function Step4IncidentType({ selected, onSelect, onBack, onNext }) {
         </button>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white max-w-lg w-full p-6 rounded shadow-lg relative">

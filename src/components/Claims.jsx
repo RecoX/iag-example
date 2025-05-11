@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SectionWrapper from './SectionWrapper';
+import SectionWrapper from './Wrappers/SectionWrapper';
 
 function Claims() {
   const [claims, setClaims] = useState([]);

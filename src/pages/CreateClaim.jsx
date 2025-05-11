@@ -34,6 +34,14 @@ function CreateClaim() {
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
 
+  const addClaim = (newClaim) => {
+    const existing = JSON.parse(localStorage.getItem("activeClaims")) || [];
+    localStorage.setItem(
+      "activeClaims",
+      JSON.stringify([...existing, newClaim])
+    );
+  };
+
   return (
     <main className="max-w-2xl mx-auto py-8 px-4 space-y-6">
       <h1 className="text-2xl font-bold">Make a Claim</h1>
@@ -90,7 +98,14 @@ function CreateClaim() {
         <Step5FullIncidentForm
           onBack={handleBack}
           onSubmit={() => {
+            addClaim({
+              id: Date.now(),
+              title: selectedAsset?.subtitle || "Untitled Vehicle",
+              type: "Motor insurance claim",
+              status: "Open claim",
+            });
             alert("🎉 Claim submitted successfully!");
+            setStep(1);
           }}
         />
       )}
