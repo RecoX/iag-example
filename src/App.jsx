@@ -1,13 +1,16 @@
+import { Routes, Route } from 'react-router-dom';
 import UserDashboard from './pages/UserDashboard';
+import CreateClaim from './pages/CreateClaim';
+import Layout from './components/Layout';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-700 text-white p-4 text-2xl font-bold">
-        IAG Insurance Portal
-      </header>
-      <UserDashboard />
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<UserDashboard />} />
+        <Route path="/create-claim" element={<CreateClaim />} />
+      </Route>
+    </Routes>
   );
 }
 
