@@ -5,9 +5,11 @@ import Step3IncidentTime from "../components/CreateClaimWizard/Step3IncidentTime
 import Step4IncidentType from "../components/CreateClaimWizard/Step4IncidentType/Step4IncidentType";
 import Step5FullIncidentForm from "../components/CreateClaimWizard/Step5FullIncidentForm/Step5FullIncidentForm";
 import GlassClaim from "../components/CreateClaimWizard/GlassClaim/GlassClaim";
+import { useNavigate } from 'react-router-dom';
 
 function CreateClaim() {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   // Shared state between steps
   const [selectedAsset, setSelectedAsset] = useState(null);
@@ -105,7 +107,7 @@ function CreateClaim() {
               status: "Open claim",
             });
             alert("🎉 Claim submitted successfully!");
-            setStep(1);
+            navigate('/');
           }}
         />
       )}
