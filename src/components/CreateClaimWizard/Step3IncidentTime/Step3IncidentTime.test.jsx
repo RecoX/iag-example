@@ -29,9 +29,13 @@ describe('Step3IncidentTime', () => {
     const mockNext = vi.fn();
     const mockChange = vi.fn();
 
+    const validDate = new Date();
+    validDate.setDate(validDate.getDate() - 1); // Set to yesterday to ensure it's not in the future
+    const formattedDate = validDate.toISOString().split('T')[0];
+
     render(
       <Step3IncidentTime
-        date={today}
+        date={formattedDate}
         time="09:15"
         meridiem="AM"
         onChange={mockChange}
